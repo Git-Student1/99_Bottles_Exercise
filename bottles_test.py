@@ -93,7 +93,7 @@ def test_a_few_verses():
     assert Bottles().verses(2, 0) == expected
 
 
-@pytest.mark.skip()
+
 def test_the_whole_song():
     expected = """99 bottles of beer on the wall, 99 bottles of beer.
 Take one down and pass it around, 98 bottles of beer on the wall.
