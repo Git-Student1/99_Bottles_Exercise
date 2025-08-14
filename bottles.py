@@ -21,22 +21,6 @@ class Bottles():
             )
 
 
-    def quantity(self, number):
-        return BottleNumber(number).quantity()
-
-    def container(self, number):
-        return BottleNumber(number).container()
-
-    def action(self, number):
-        return BottleNumber(number).action()
-
-    def pronoun(self, number):
-        return BottleNumber(number).pronoun()
-
-    def successor(self, number):
-        return BottleNumber(number).successor()
-
-
 class BottleNumber:
   def __init__(self, number):
     self._number = number
@@ -67,3 +51,6 @@ class BottleNumber:
       if self._number == 0:
           return 99
       return self._number - 1
+
+
+
