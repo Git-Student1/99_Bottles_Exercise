@@ -2,38 +2,36 @@
 class Bottles():
     def __init__(self):
         pass
-
-    @staticmethod
-    def bottle_number_given(number):
-        match number:
-            case 0:
-                cls = BottleNumber0
-            case 1:
-                cls = BottleNumber1
-            case _:
-                cls = BottleNumber
-        return cls(number)
-
     def song(self):
         return self.verses(99, 0)
     def verses(self, upper, lower):
         return '\n'.join(self.verse(i) for i in reversed(range(lower, upper + 1)))
     def verse(self, number):
-        bottle_number = self.bottle_number_given(number)
-        next_bottle_number = self.bottle_number_given(bottle_number.successor())
+        bottle_number = BottleNumber(number)
         return (
             f'{bottle_number}'.capitalize() +
             ' of beer on the wall, '
             f'{bottle_number} of beer.\n'
             f'{bottle_number.action()}, '
-            f'{next_bottle_number}'
+            f'{bottle_number.successor()}'
             ' of beer on the wall.\n'
             )
 
 
 class BottleNumber:
+  def __new__(cls, number):
+      match number:
+          case 0:
+              cls = BottleNumber0
+          case 1:
+              cls = BottleNumber1
+          case _:
+              cls = BottleNumber
+      return super().__new__(cls)
+
   def __init__(self, number):
     self._number = number
+
   def __str__(self):
       return f'{self.quantity()} {self.container()}'
 
@@ -50,7 +48,7 @@ class BottleNumber:
       return 'one'
 
   def successor(self):
-      return self._number - 1
+      return BottleNumber(self._number - 1)
 
 
 class BottleNumber0(BottleNumber):
@@ -58,7 +56,7 @@ class BottleNumber0(BottleNumber):
         return 'no more'
 
     def successor(self):
-        return 99
+        return BottleNumber(99)
 
     def action(self):
         return 'Go to the store and buy some more'
