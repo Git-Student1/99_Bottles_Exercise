@@ -12,12 +12,11 @@ class Bottles():
         bottle_number = BottleNumber(number)
         next_bottle_number = BottleNumber(bottle_number.successor())
         return (
-            f'{bottle_number.quantity().capitalize()} {bottle_number.container()}'
+            f'{bottle_number}'.capitalize() +
             ' of beer on the wall, '
-            f'{bottle_number.quantity()} {bottle_number.container()} of beer.\n'
+            f'{bottle_number} of beer.\n'
             f'{bottle_number.action()}, '
-            f'{next_bottle_number.quantity()} '
-            f'{next_bottle_number.container()}'
+            f'{next_bottle_number}'
             ' of beer on the wall.\n'
             )
 
@@ -41,6 +40,8 @@ class Bottles():
 class BottleNumber:
   def __init__(self, number):
     self._number = number
+  def __str__(self):
+      return f'{self.quantity()} {self.container()}'
 
   def quantity(self):
       if self._number == 0:
