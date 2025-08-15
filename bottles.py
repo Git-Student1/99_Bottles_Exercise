@@ -19,36 +19,38 @@ class Bottles():
 
 
 class BottleNumber:
-  def __new__(cls, number):
-      match number:
-          case 0:
-              cls = BottleNumber0
-          case 1:
-              cls = BottleNumber1
-          case _:
-              cls = BottleNumber
-      return super().__new__(cls)
+    def __new__(cls, number):
+        match number:
+            case 0:
+                cls = BottleNumber0
+            case 1:
+                cls = BottleNumber1
+            case 6:
+                cls = BottleNumber6
+            case _:
+                cls = BottleNumber
+        return super().__new__(cls)
 
-  def __init__(self, number):
-    self._number = number
+    def __init__(self, number):
+        self._number = number
 
-  def __str__(self):
-      return f'{self.quantity()} {self.container()}'
+    def __str__(self):
+        return f'{self.quantity()} {self.container()}'
 
-  def quantity(self):
-      return str(self._number)
+    def quantity(self):
+        return str(self._number)
 
-  def container(self):
-      return 'bottles'
+    def container(self):
+        return 'bottles'
 
-  def action(self):
-      return f'Take {self.pronoun()} down and pass it around'
+    def action(self):
+        return f'Take {self.pronoun()} down and pass it around'
 
-  def pronoun(self):
-      return 'one'
+    def pronoun(self):
+        return 'one'
 
-  def successor(self):
-      return BottleNumber(self._number - 1)
+    def successor(self):
+        return BottleNumber(self._number - 1)
 
 
 class BottleNumber0(BottleNumber):
@@ -67,3 +69,8 @@ class BottleNumber1(BottleNumber):
 
     def pronoun(self):
         return 'it'
+class BottleNumber6(BottleNumber):
+    def container(self):
+        return "six-pack"
+    def quantity(self):
+        return 1
