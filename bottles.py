@@ -20,15 +20,12 @@ class Bottles():
 
 class BottleNumber:
     def __new__(cls, number):
-        match number:
-            case 0:
-                cls = BottleNumber0
-            case 1:
-                cls = BottleNumber1
-            case 6:
-                cls = BottleNumber6
-            case _:
-                cls = BottleNumber
+        class_names = {
+            0: BottleNumber0,
+            1: BottleNumber1,
+            6: BottleNumber6
+        }
+        cls = class_names.get(number, BottleNumber)
         return super().__new__(cls)
 
     def __init__(self, number):
