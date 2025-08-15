@@ -4,17 +4,16 @@ class BottleVerse:
     def lyrics(cls, number):
         return cls(BottleNumber(number))._lyrics()
 
-    def __init__(self, number):
-        self._number = number
+    def __init__(self, bottle_number):
+        self._bottle_number = bottle_number
 
     def _lyrics(self):
-        bottle_number = self._number
         return (
-            f'{bottle_number}'.capitalize() +
+            f'{self._bottle_number}'.capitalize() +
             ' of beer on the wall, '
-            f'{bottle_number} of beer.\n'
-            f'{bottle_number.action()}, '
-            f'{bottle_number.successor()}'
+            f'{self._bottle_number} of beer.\n'
+            f'{self._bottle_number.action()}, '
+            f'{self._bottle_number.successor()}'
             ' of beer on the wall.\n'
             )
 
