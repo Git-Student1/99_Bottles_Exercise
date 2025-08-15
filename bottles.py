@@ -7,7 +7,13 @@ class Bottles():
     def verses(self, upper, lower):
         return '\n'.join(self.verse(i) for i in reversed(range(lower, upper + 1)))
     def verse(self, number):
-        bottle_number = BottleNumber(number)
+        return BottleVerse(number).lyrics()
+
+class BottleVerse:
+    def __init__(self, number):
+        self._number = number
+    def lyrics(self):
+        bottle_number = BottleNumber(self._number)
         return (
             f'{bottle_number}'.capitalize() +
             ' of beer on the wall, '
@@ -16,7 +22,6 @@ class Bottles():
             f'{bottle_number.successor()}'
             ' of beer on the wall.\n'
             )
-
 
 class BottleNumber:
     def __new__(cls, number):
