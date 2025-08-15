@@ -1,19 +1,14 @@
 
-class Bottles():
-    def __init__(self):
-        pass
-    def song(self):
-        return self.verses(99, 0)
-    def verses(self, upper, lower):
-        return '\n'.join(self.verse(i) for i in reversed(range(lower, upper + 1)))
-    def verse(self, number):
-        return BottleVerse(number).lyrics()
-
 class BottleVerse:
+    @classmethod
+    def lyrics(cls, number):
+        return cls(BottleNumber(number))._lyrics()
+
     def __init__(self, number):
         self._number = number
-    def lyrics(self):
-        bottle_number = BottleNumber(self._number)
+
+    def _lyrics(self):
+        bottle_number = self._number
         return (
             f'{bottle_number}'.capitalize() +
             ' of beer on the wall, '
@@ -22,6 +17,19 @@ class BottleVerse:
             f'{bottle_number.successor()}'
             ' of beer on the wall.\n'
             )
+
+
+
+class Bottles():
+    def __init__(self, verse_template=BottleVerse):
+        self._verse_template = verse_template
+    def song(self):
+        return self.verses(99, 0)
+    def verses(self, upper, lower):
+        return '\n'.join(self.verse(i) for i in reversed(range(lower, upper + 1)))
+    def verse(self, number):
+        return self._verse_template.lyrics(number)
+
 
 class BottleNumber:
     def __new__(cls, number):
